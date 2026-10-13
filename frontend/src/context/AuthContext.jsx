@@ -1,6 +1,10 @@
 ﻿import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
+// Automatically use the live Render API URL if not on localhost
+const API_BASE = import.meta.env.VITE_API_URL || (window.location.hostname === "localhost" ? "" : "https://job-portal-fe45.onrender.com");
+axios.defaults.baseURL = API_BASE;
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -8,7 +12,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [loading, setLoading] = useState(true);
 
-  // Set default axios header
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {

@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -15,7 +15,7 @@ const dashboardRoutes = require('./routes/dashboard.routes');
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: true, credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -39,3 +39,4 @@ app.use((_req, res) => res.status(404).json({ success: false, message: 'Route no
 app.use(errorHandler);
 
 module.exports = app;
+
